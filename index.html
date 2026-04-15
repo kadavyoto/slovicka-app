@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slovíčka</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Slovíčka</h1>
+    <p class="subtitle">Čeština ↔ Angličtina</p>
+  </header>
+
+  <nav>
+    <button class="nav-btn active" data-section="pridat">Přidat slovíčko</button>
+    <button class="nav-btn" data-section="procvicovat">Procvičovat</button>
+    <button class="nav-btn" data-section="prehled">Přehled</button>
+  </nav>
+
+  <main>
+
+    <!-- Sekce: Přidat slovíčko -->
+    <section id="pridat" class="section active">
+      <h2>Přidat nové slovíčko</h2>
+      <form id="formPridat">
+        <div class="form-group">
+          <label for="inputCesky">České slovo</label>
+          <input type="text" id="inputCesky" placeholder="např. jablko" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="inputAnglicky">Anglický překlad</label>
+          <input type="text" id="inputAnglicky" placeholder="např. apple" autocomplete="off">
+        </div>
+        <button type="submit" class="btn-primary">Přidat slovíčko</button>
+      </form>
+      <div id="zpravaPridani" class="zprava hidden"></div>
+    </section>
+
+    <!-- Sekce: Procvičovat -->
+    <section id="procvicovat" class="section">
+      <h2>Procvičování</h2>
+
+      <div class="smer-prepinac">
+        <button class="smer-btn active" data-smer="cs-en">🇨🇿 → 🇬🇧 česky na anglicky</button>
+        <button class="smer-btn" data-smer="en-cs">🇬🇧 → 🇨🇿 anglicky na česky</button>
+      </div>
+
+      <div class="skore-bar">
+        <span>Správně: <strong id="skoreSpravne">0</strong></span>
+        <span>Chybně: <strong id="skoreChybne">0</strong></span>
+        <span>Zbývá: <strong id="skoreZbyva">0</strong></span>
+        <span>Kolo: <strong id="skoreKolo">0</strong> / <strong id="skoreKoloCelkem">10</strong></span>
+      </div>
+
+      <div id="kartickaPrazdna" class="karticka-info">
+        <p id="kartickaPrazdnaText">Zatím nemáš žádná slovíčka. Nejdřív nějaká přidej!</p>
+      </div>
+
+      <div id="kartickaObal" class="hidden">
+        <div id="karticka" class="karticka">
+          <div class="karticka-vnitrni">
+            <div class="karticka-predni">
+              <span class="karticka-jazyk" id="kartickaJazykPredni"></span>
+              <p id="kartickaText"></p>
+              <span class="karticka-napoveda">Klikni pro překlad</span>
+            </div>
+            <div class="karticka-zadni">
+              <span class="karticka-jazyk" id="kartickaJazykZadni"></span>
+              <p id="kartickaPreklad"></p>
+            </div>
+          </div>
+        </div>
+
+        <div id="tlacitkaHodnoceni" class="tlacitka-hodnoceni hidden">
+          <button id="btnChybne" class="btn-chybne">Nevěděl jsem</button>
+          <button id="btnSpravne" class="btn-spravne">Věděl jsem</button>
+        </div>
+      </div>
+
+      <div id="konecProcvicovani" class="karticka-info hidden">
+        <p id="konecZprava">Výborně! Prošel jsi všechna slovíčka.</p>
+        <p class="konec-skore">Správně: <strong id="konecSpravne">0</strong> / <strong id="konecCelkem">0</strong></p>
+        <button id="btnZnovaSpustit" class="btn-primary">Procvičovat znovu</button>
+      </div>
+    </section>
+
+    <!-- Sekce: Přehled -->
+    <section id="prehled" class="section">
+      <div class="prehled-hlavicka">
+        <h2>Přehled slovíček</h2>
+        <div class="prehled-akce">
+          <button id="btnExport" class="btn-akce" title="Exportovat do CSV">↓ Export CSV</button>
+          <label id="btnImportLabel" class="btn-akce" title="Importovat z CSV">↑ Import CSV
+            <input type="file" id="inputImport" accept=".csv,text/csv" class="hidden">
+          </label>
+        </div>
+      </div>
+      <div id="zpravaPrehled" class="zprava hidden"></div>
+      <div id="prehledPrazdny" class="karticka-info">
+        <p>Zatím nemáš žádná slovíčka.</p>
+      </div>
+      <ul id="seznamSlovicek" class="seznam-slovicek hidden"></ul>
+    </section>
+
+  </main>
+
+  <!-- Modál: Editace slovíčka -->
+  <div id="modalOverlay" class="modal-overlay hidden">
+    <div class="modal">
+      <h3>Upravit slovíčko</h3>
+      <form id="formEditovat">
+        <div class="form-group">
+          <label for="editCesky">České slovo</label>
+          <input type="text" id="editCesky" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="editAnglicky">Anglický překlad</label>
+          <input type="text" id="editAnglicky" autocomplete="off">
+        </div>
+        <div class="modal-tlacitka">
+          <button type="button" id="btnZrusitEdit" class="btn-secondary">Zrušit</button>
+          <button type="submit" class="btn-primary">Uložit změny</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

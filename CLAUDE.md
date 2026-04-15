@@ -1,0 +1,1 @@
+Tento projekt je jednoduchá webová aplikace na učení slovíček (čeština-angličtina). Tech stack: HTML, CSS, vanilla JavaScript. Žádné frameworky. Aplikace běží jako statická stránka v prohlížeči. Funkce: přidávání slovíček, procvičování (kartičky), sledování skóre. Všechny texty v UI jsou v češtině.
